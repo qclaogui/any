@@ -1,18 +1,20 @@
-package any
+package any_test
 
 import (
 	"encoding/json"
 	"testing"
+
+	"github.com/qclaogui/any"
 
 	"github.com/google/go-cmp/cmp"
 )
 
 func TestBoolCase(t *testing.T) {
 	type user struct {
-		Name  string  `json:"name"`
-		Age   int     `json:"age"`
-		IsMan Value   `json:"is_man"`
-		Point float64 `json:"point"`
+		Name  string    `json:"name"`
+		Age   int       `json:"age"`
+		IsMan any.Value `json:"is_man"`
+		Point float64   `json:"point"`
 	}
 	tests := map[string]struct {
 		data []byte
@@ -39,10 +41,10 @@ func TestBoolCase(t *testing.T) {
 
 func TestIntCase(t *testing.T) {
 	type user struct {
-		Name  string  `json:"name"`
-		Age   Value   `json:"age"`
-		IsMan bool    `json:"is_man"`
-		Point float64 `json:"point"`
+		Name  string    `json:"name"`
+		Age   any.Value `json:"age"`
+		IsMan bool      `json:"is_man"`
+		Point float64   `json:"point"`
 	}
 	tests := map[string]struct {
 		data []byte
