@@ -66,3 +66,20 @@ func TestIntCase(t *testing.T) {
 		})
 	}
 }
+
+func TestUnicodeCase(t *testing.T) {
+	type user struct {
+		Name any.Value `json:"name"`
+		Age  int       `json:"age"`
+	}
+
+	var u user
+	want := user{Name: "你好", Age: 10}
+	data := []byte(`{"name":"\u4f60\u597d","age":10}`)
+	if df := cmp.Diff(json.Unmarshal(data, &u), nil); df != "" {
+		t.Errorf("👉 \x1b[92m%s\x1b[39m", df)
+	}
+	if df := cmp.Diff(u, want); df != "" {
+		t.Errorf("👉 \x1b[92m%s\x1b[39m", df)
+	}
+}
